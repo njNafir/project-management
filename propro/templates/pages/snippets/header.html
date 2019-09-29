@@ -1,0 +1,26 @@
+<div class="" style="background-color: #1B242F;">
+	<div class="container">
+		<div class="menu-wrap">
+			{% include 'pages/snippets/navbar.html' %}
+		</div>
+	</div>
+</div>
+{% if home_page %}
+	<div class="container" style="margin-top: 18rem;">
+		<div class="header-content text-center">
+			<div class="text-light py-4">
+				<h2 class="title display-3 pt-4 pb-2">{% if info.title %}{{ info.title }}{% endif %}</h2>
+				<div class="py-5 link">
+					<div class="row">
+						<div class="view-project col-12 col-md-6 text-right d-block">
+							<a class="mx-3 my-3 py-4 px-5 bg-secondary text-light" href="{% url 'project_page' %}">View Projects</a>
+						</div>
+						<div class="submit-project col-12 col-md-6 text-left d-block">
+							<a class="mx-3 my-3 py-4 px-5 bg-info text-light" href="{% url 'add_project' %}">Submit Project</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

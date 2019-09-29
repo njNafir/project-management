@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<div class="container mt-5 d-block pb-5">
+	<h1 class="wrapper-title about-title display-3 {% if home_page %}py-5{% else %}py-2 pt-space{% endif %} text-uppercase">About</h1>
+	<div class="about-content py-5 text-left">
+		{% if home_page %}
+		<div class="about-objective">
+			<h3 class="objective pb-4 pt-2">{% if info.objective %}{{ info.objective|linebreaks }}{% endif %}</h3>
+		</div>
+		<div class="about-more more-from-home-to-another mt-5 py-5 mx-4 text-uppercase text-center">
+			<a class="bg-dark py-4 px-5 my-4 mx-4 text-light text-decoration-none" href="{% url 'about_page' %}">Learn More</a>
+		</div>
+		{% else %}
+		{% if info.title %}
+		<div class="about-name text-center text-uppercase">
+			<h2 class="name-title py-2 pb-5">{{ info.title }}</h2>
+		</div>
+		{% endif %}
+		{% if info.name %}
+		<div class="about-name text-center text-uppercase">
+			<h2 class="name-title py-2">{{ info.name }}</h2>
+			{% if info.position %}
+			<h4 class="position py-2 pb-5">{{ info.position }}</h4>
+			{% endif %}
+		</div>
+		{% endif %}
+		{% if info.quote %}
+		<div class="about-quote">
+			<h2 class="quote-title py-2 text-uppercase">Quote:</h2>
+			<h3 class="quote pb-5 pt-1 pl-5">{{ info.quote|linebreaks }}</h3>
+		</div>
+		{% endif %}
+		{% if info.objective %}
+		<div class="about-objective">
+			<h2 class="objective-title py-2 text-uppercase">Objective:</h2>
+			<h3 class="objective pb-5 pt-1 pl-5">{{ info.objective|linebreaks }}</h3>
+		</div>
+		{% endif %}
+		{% if info.description %}
+		<div class="about-description">
+			<h2 class="description-title py-2 text-uppercase">Description:</h2>
+			<h3 class="description pb-5 pt-1 pl-5">{{ info.description|linebreaks }}</h3>
+		</div>
+		{% endif %}
+		{% if info.process %}
+		<div class="about-process">
+			<h2 class="process-title py-2 text-uppercase">Process:</h2>
+			<h3 class="process pb-5 pt-1 pl-5">{{ info.process|linebreaks }}</h3>
+		</div>
+		{% endif %}
+		{% if info.experience %}
+		<div class="about-experience">
+			<h2 class="experience-title py-2 text-uppercase">Experience:</h2>
+			<h3 class="experience pb-5 pt-1 pl-5">{{ info.experience|linebreaks }}</h3>
+		</div>
+		{% endif %}
+		{% endif %}
+	</div>
+</div>

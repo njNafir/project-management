@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}{% if single %}{{ pr.title }}{% if pr.subtitle %} | {{ pr.subtitle }}{% endif %}{% else %}Projects{% endif %}{% if info.title %} | {{ info.title }}{% endif %}{% endblock title %}
+{% block stylesheet %}
+	<link rel="stylesheet" type="text/css" href="{% static 'pro/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'pro/css/home.css' %}">
+{% endblock stylesheet %}
+{% block content %}
+<header class="header-wrap header-bg">
+	<div class="row">
+		<div class="col-12">
+			{% include 'pages/snippets/header.html' %}
+		</div>
+	</div>
+</header>
+<main class="content-wrap" style="background-color: #F5F5F5;">
+	<div class="row text-center">
+		<div class="col-12">
+			<div class="portfolio-wrap d-block">
+				{% include 'pages/snippets/home_project.html' %}
+			</div>
+		</div>
+	</div>
+</main>
+<footer class="footer-wrap footer-bg py-5">
+	<div class="row">
+		<div class="col-12">
+			{% include 'pages/snippets/footer.html' %}
+		</div>
+	</div>
+</footer>
+{% endblock content %}

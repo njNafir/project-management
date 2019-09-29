@@ -1,0 +1,81 @@
+{% load staticfiles %}
+{% url 'project_page' as projects %}
+{% url 'search_project' as search_project %}
+{% url 'home_page' as home %}
+<div class="container mt-5 pb-5 d-block" style="overflow: hidden;">
+	{% if not single and not add_project %}
+	<h1 class="wrapper-title project-title display-3 {% if home_page %}py-5 mb-5{% else %}py-2 pt-space{% endif %} text-uppercase">Approved Projects</h1>
+	{% endif %}
+	<div class="project-content my-5">
+		<div class="row no-gutters py-5">
+			{% if add_project %}
+			<div class="col-12 col-md-9 col-lg-7 mx-auto">
+				<div class="submit-project-form">
+					<h1 class="project-quote {% if not home_page %}display-3 pt-5 text-uppercase{% endif %}">Submit Your Project!</h1>
+					<hr>
+					<div class="form-wrap">
+						<form class="form" method="POST" action="" enctype="multipart/form-data">
+							{{ submit_form.as_p }}
+							{% csrf_token %}
+							<input type="submit" name="Submit" class="btn px-5 py-3 text-uppercase submit-submit-project-form submit" value="Submit Project">
+						</form>
+					</div>
+				</div>	
+			</div>
+			{% else %}
+			{% if not single %}
+			{% if prs %}
+			{% for pr in prs %}
+				<div class="col-12 col-md-6 col-lg-4 float-left">
+					<div class="thumbnail-wrapper">
+						<img class="img-fluid" src="{% static pr.thumbnail.url %}" style="width: 100vh;">
+						<div class="learn-more py-3">
+							<h2 class="title">{{ pr.title }}</h2>
+							<h2 class="subtitle">{{ pr.subtitle }}</h2>
+							<div class="learn-more-btn-wrap">
+								<a id="learnMoreBtn" class="learn-more-btn btn btn-lg btn-outline-success" href="{{ pr.get_absolute_url }}">Show More</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			{% endif %}
+			{% endif %}
+			{% if single %}
+			{% if pr %}
+				<div class="single-project col-12 d-block">
+					<div class="project-title py-4 text-uppercase">
+						<h2 class="title d-inline"><span style="color: #E31B6D;">{{ pr.title }}</span>{% if pr.subtitle %}<span> ( {{ pr.subtitle }} ) </span>{% endif %}</h2>
+					</div>
+					<div class="project-meta">
+						<h2 class="team-name">{{ pr.group_name }}</h2>
+						<h2 class="team-member">{{ pr.members_name }}</h2>
+					</div>
+					<div class="project-description py-4 mb-3">
+						<p>{{ pr.description }}</p>
+					</div>
+					<div class="pt-2 pb-5">
+						<div class="project-thumbnail">
+							<img src="{% static pr.thumbnail.url %}" class="d-block w-100" alt="Thumbnail image">
+						</div>
+					</div>
+					<div class="project-used-skill py-3">
+						<h2 class="text-uppercase my-4 py-4 px-1">Used Skill:</h2>
+						<h2 class="skills">{{ pr.used_skill }}</h2>
+					</div>	
+					<div class="download-project-file py-3">
+						<a href="{% static pr.project_proposal.url %}" class="btn btn-outline-info text-uppercase">Project proposal file</a>
+						<a href="{% static pr.project_file.url %}" class="btn btn-outline-info text-uppercase">Download project file</a>
+					</div>
+				</div>
+			{% endif %}
+			{% endif %}
+			{% endif %}
+		</div>
+	</div>
+	{% if home_page %}
+	<div class="project-more more-from-home-to-another my-5 py-5 mx-4 text-uppercase">
+		<a class="bg-dark py-4 px-5 my-4 mx-4 text-light text-decoration-none" href="{% url 'project_page' %}">More Projects</a>
+	</div>
+	{% endif %}
+</div>
